@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from sqlmodel import select
 
 from models.todos import Todo, TodoPublic, TodoCreate, TodoUpdate
