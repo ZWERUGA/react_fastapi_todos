@@ -9,6 +9,6 @@ dependencies = [
     "passlib[bcrypt]>=1.7.4",
     "pyjwt>=2.10.1",
     "python-multipart>=0.0.20",
-    "sqlmodel>=0.0.24",
+    "sqlalchemy>=2.0.39",
     "uvicorn>=0.34.0",
 ]
