@@ -1,7 +1,6 @@
 from fastapi import APIRouter
-from sqlmodel import select
 
-from models.todos import Todo, TodoPublic, TodoCreate, TodoUpdate
+from schemas.todos import Todo, TodoCreate, TodoUpdate
 from database.database import SessionDep
 import services.todos as service
 
@@ -9,7 +8,7 @@ import services.todos as service
 router = APIRouter(prefix="/todos")
 
 
-@router.get("/", response_model=list[TodoPublic])
+@router.get("/", response_model=list[Todo])
 def get_todos(session: SessionDep):
     """
     Получение всех задач из БД.
@@ -17,7 +16,7 @@ def get_todos(session: SessionDep):
     return service.get_todos(session=session)
 
 
-@router.get("/{todo_id}", response_model=TodoPublic)
+@router.get("/{todo_id}", response_model=Todo)
 def get_todo(todo_id: int, session: SessionDep):
     """
     Получение задачи из БД по ID.
@@ -25,7 +24,7 @@ def get_todo(todo_id: int, session: SessionDep):
     return service.get_todo(todo_id=todo_id, session=session)
 
 
-@router.post("/", response_model=TodoPublic)
+@router.post("/", response_model=Todo)
 def create_todo(todo: TodoCreate, session: SessionDep):
     """
     Создание задачи и добавление в БД.
@@ -33,7 +32,7 @@ def create_todo(todo: TodoCreate, session: SessionDep):
     return service.create_todo(todo=todo, session=session)
 
 
-@router.patch("/{todo_id}", response_model=TodoPublic)
+@router.patch("/{todo_id}", response_model=Todo)
 def update_todo(todo_id: int, todo: TodoUpdate, session: SessionDep):
     """
     Обновление задачи в БД.
