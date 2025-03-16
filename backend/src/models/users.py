@@ -1,14 +1,15 @@
-from sqlmodel import Field, SQLModel
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
 
 
-class UserBase(SQLModel):
-    username: str
+class Base(DeclarativeBase):
+    pass
 
 
-class User(UserBase, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    hashed_password: str
+class User(Base):
+    __tablename__ = "users"
 
-
-class UserPublic(UserBase):
-    id: int
+    id: Mapped[int] = mapped_column(primary_key=True)
+    username: Mapped[str]
+    hashed_password: Mapped[str]

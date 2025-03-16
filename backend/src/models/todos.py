@@ -1,24 +1,15 @@
-from sqlmodel import Field, SQLModel
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
 
 
-class TodoBase(SQLModel):
-    text: str
-
-
-class Todo(TodoBase, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    is_completed: bool = Field(default=False)
-
-
-class TodoPublic(TodoBase):
-    id: int
-    is_completed: bool
-
-
-class TodoCreate(TodoBase):
+class Base(DeclarativeBase):
     pass
 
 
-class TodoUpdate(TodoBase):
-    text: str | None = None
-    is_completed: bool | None = None
+class Todo(Base):
+    __tablename__ = "todos"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    text: Mapped[str]
+    is_completed: Mapped[bool] = mapped_column(default=False)
