@@ -6,11 +6,11 @@ from jwt.exceptions import InvalidTokenError
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
-from sqlmodel import select
+from sqlalchemy import select
 
 from database.database import SessionDep
-from models.tokens import TokenData
-from models.users import User
+from schemas.tokens import TokenData
+from schemas.users import User
 
 
 SECRET_KEY = "cb470a798b0a89e0e83890b076396fe937be39fbe84ec71e988d9dc8bc68f048"
