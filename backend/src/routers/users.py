@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
 from schemas.users import User
+from models.users import User as UserORM
 from schemas.tokens import Token
 from services.users import (
     authenticate_user,
@@ -51,7 +52,7 @@ async def register(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()], session: SessionDep
 ):
     """
-    Регистрирует пользователя.
+    Регистрация пользователя.
     """
     if get_user(form_data.username, session):
         raise HTTPException(
@@ -64,8 +65,7 @@ async def register(
         "hashed_password": get_password_hash(form_data.password),
     }
 
-    db_user = User.model_validate(new_user)
-    session.add(db_user)
+    new_user = UserORM(**new_user)
+    session.add(new_user)
     session.commit()
-    session.refresh(db_user)
-    return db_user
+    return {"message": "User was created..."}

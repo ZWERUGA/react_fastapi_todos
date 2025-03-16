@@ -11,6 +11,7 @@ from sqlalchemy import select
 from database.database import SessionDep
 from schemas.tokens import TokenData
 from schemas.users import User
+from models.users import User as UserORM
 
 
 SECRET_KEY = "cb470a798b0a89e0e83890b076396fe937be39fbe84ec71e988d9dc8bc68f048"
@@ -39,7 +40,7 @@ def get_user(username: str, session: SessionDep):
     """
     Возвращает пользователя из БД.
     """
-    db_user = session.exec(select(User).filter_by(username=username)).first()
+    db_user = session.execute(select(UserORM).filter_by(username=username)).scalar()
     return db_user
 
 
