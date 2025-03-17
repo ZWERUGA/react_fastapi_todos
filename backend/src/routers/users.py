@@ -4,8 +4,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from schemas.users import User
-from models.users import User as UserORM
+from models.tables import User as UserORM
 from schemas.tokens import Token
 from services.users import (
     authenticate_user,

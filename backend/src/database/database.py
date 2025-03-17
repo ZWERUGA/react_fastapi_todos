@@ -4,8 +4,7 @@ from fastapi import Depends
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import Session
 
-from models.todos import Todo
-from models.users import User
+from models.tables import Todo, User
 
 
 sqlite_file_name = "todos.db"
