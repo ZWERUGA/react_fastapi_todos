@@ -11,7 +11,7 @@ from sqlalchemy import select
 from database.database import SessionDep
 from schemas.tokens import TokenData
 from schemas.users import User
-from models.users import User as UserORM
+from models.tables import User as UserORM
 
 
 SECRET_KEY = "cb470a798b0a89e0e83890b076396fe937be39fbe84ec71e988d9dc8bc68f048"
